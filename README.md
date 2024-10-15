@@ -1,36 +1,11 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#### Notes:
 
-## Getting Started
+Read the local image, process it using a web worker, and display it in your Next.js component.
 
-First, run the development server:
+The worker is like an extra set of hands for your browser. When you give it an image to work on, it performs operations like blurring, resizing, and more without slowing down your main webpage. It runs in the background, making sure your page stays responsive.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+imageBuffer is a Buffer. This type represents a sequence of bytes and is commonly used for handling binary data, such as images or files, in Node.js. When you pass this Buffer to the web worker or use it in any image processing operations, it retains its binary format, which Jimp can handle perfectly.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+MIME_PNG in Jimp stands for the MIME type for PNG images. MIME types are used to tell browsers what type of file is being sent. So, Jimp.MIME_PNG is just the way Jimp identifies a PNG image file. It ensures the image you’re working with is processed and output as a PNG. This keeps things neat and compatible across different systems and browsers.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+jimp.d.ts manually defines the expected types (since some of them appear to be missing from jimp).
