@@ -20,7 +20,7 @@ ctx.addEventListener("message", async (e: MessageEvent) => {
     console.log("Image processed by Jimp:", image);
 
     if (options.resize) {
-      image.resize({ w: options.resize });
+      image.resize({ w: options.resize.w });
     }
     if (options.blur) {
       image.blur(options.blur);
@@ -38,10 +38,10 @@ ctx.addEventListener("message", async (e: MessageEvent) => {
       image.sepia();
     }
     if (options.quantize) {
-      image.quantize({ colors: options.quantize });
+      image.quantize({ colors: options.quantize.colors });
     }
     if (options.fisheye) {
-      image.fisheye(options.fisheye);
+      image.fisheye();
     }
     if (options.normalize) {
       image.normalize();
