@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import style from "@/styles/this.module.css";
 
 export default function ImageComponent({ imageUrl }: { imageUrl: string }) {
   const [output, setOutput] = useState<string>(""); // Store image data
@@ -91,34 +92,75 @@ export default function ImageComponent({ imageUrl }: { imageUrl: string }) {
             width={500}
           />
 
-          <div style={{ marginTop: "20px" }}>
-            <button onClick={() => applyEffect({ resize: { w: 100 } })}>
+          <div style={{ marginTop: "10px" }}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ resize: { w: 100 } })}
+            >
               Resize
             </button>
-            <button onClick={() => applyEffect({ blur: 20 })}>Blur</button>
-            <button onClick={() => applyEffect({ invert: true })}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ blur: 20 })}
+            >
+              Blur
+            </button>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ invert: true })}
+            >
               Invert
             </button>
-            <button onClick={() => applyEffect({ opacity: 0.1 })}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ opacity: 0.1 })}
+            >
               Opacity
             </button>
-            <button onClick={() => applyEffect({ pixelate: 20 })}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ pixelate: 20 })}
+            >
               Pixelate
             </button>
-            <button onClick={() => applyEffect({ sepia: true })}>Sepia</button>
-            <button onClick={() => applyEffect({ posterize: 5 })}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ sepia: true })}
+            >
+              Sepia
+            </button>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ posterize: 5 })}
+            >
               Posterize
             </button>
-            <button onClick={() => applyEffect({ quantize: { colors: 2 } })}>
-              Quantize
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ quantize: { colors: 2 } })}
+            >
+              Quantize (2)
             </button>
-            <button onClick={() => applyEffect({ fisheye: true })}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ quantize: { colors: 4 } })}
+            >
+              Quantize (4)
+            </button>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ fisheye: true })}
+            >
               Fisheye
             </button>
-            <button onClick={() => applyEffect({ normalize: true })}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ normalize: true })}
+            >
               Normalize
             </button>
             <button
+              className={style["button"]}
               onClick={() =>
                 applyEffect({ flip: { horizontal: true, vertical: true } })
               }
@@ -126,6 +168,7 @@ export default function ImageComponent({ imageUrl }: { imageUrl: string }) {
               Flip
             </button>
             <button
+              className={style["button"]}
               onClick={() =>
                 applyEffect({ crop: { h: 200, w: 200, x: 100, y: 100 } })
               }
@@ -133,24 +176,26 @@ export default function ImageComponent({ imageUrl }: { imageUrl: string }) {
               Crop
             </button>
             <button
+              className={style["button"]}
               onClick={() => applyEffect({ rotate: { deg: 130, mode: false } })}
             >
               Rotate
             </button>
-            <button onClick={() => applyEffect({ fade: 0.9 })}>Fade</button>
-            <button onClick={() => applyEffect({ brightness: 2 })}>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ fade: 0.9 })}
+            >
+              Fade
+            </button>
+            <button
+              className={style["button"]}
+              onClick={() => applyEffect({ brightness: 2 })}
+            >
               Brightness
             </button>
 
             {/* Reset Button */}
-            <button
-              onClick={resetImage}
-              style={{
-                marginTop: "10px",
-                backgroundColor: "red",
-                color: "white",
-              }}
-            >
+            <button className={style["button-reset"]} onClick={resetImage}>
               Reset
             </button>
           </div>
