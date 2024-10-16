@@ -1,9 +1,7 @@
 import { Jimp, loadFont} from "jimp";
 import Image from "next/image";
 
-
-
-export default async function MattPage() {
+export default async function MattHostedInputPage() {
 
   // basic resize
   const image1 = await Jimp.read("./public/sloth.jpg");
