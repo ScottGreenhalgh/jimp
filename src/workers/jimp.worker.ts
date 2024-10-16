@@ -80,6 +80,8 @@ ctx.addEventListener("message", async (e: MessageEvent) => {
       base64param = "image/tiff";
     } else if (suffix.includes(".gif")) {
       base64param = "image/gif";
+    } else {
+      throw new Error("incorrect file type given");
     }
 
     ctx.postMessage({ base64: await image.getBase64(base64param) });

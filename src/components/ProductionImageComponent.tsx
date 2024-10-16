@@ -4,15 +4,23 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import style from "@/styles/this.module.css";
 
-export default function ImagePlusButtons({ imageUrl }: { imageUrl: string }) {
+export default function ProductionImageComponent() {
   const [output, setOutput] = useState<string>(""); // Store image data
-  const [isLoading, setIsLoading] = useState<boolean>(true); // Loading state
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [file, setFile] = useState<File | null>(null); // Store the uploaded file
   const [originalImageBuffer, setOriginalImageBuffer] =
     useState<ArrayBuffer | null>(null); // Store original image buffer
-  const suffix = imageUrl.slice(imageUrl.lastIndexOf(".")); // File extension
 
-  // Fetch and store the original image buffer
+  // Handle file input change
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+    setFile(e.target.files[0]); // Set file from input
+  }
+
+  // Fetch and store the original image buffer on file upload
   useEffect(() => {
+    if (!file) return;
+
     const worker = new Worker(
       new URL("@/workers/jimp.worker.ts", import.meta.url),
       {
@@ -20,30 +28,36 @@ export default function ImagePlusButtons({ imageUrl }: { imageUrl: string }) {
       }
     );
 
-    fetch(imageUrl)
-      .then((res) => res.arrayBuffer()) // Fetch the image and convert to buffer
-      .then((buffer) => {
-        setOriginalImageBuffer(buffer); // Store the original image buffer
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching the image:", err);
-        setIsLoading(false);
+    const suffix = file.name.slice(file.name.lastIndexOf(".")); // Get file extension
+
+    file.arrayBuffer().then((imageBuffer) => {
+      setOriginalImageBuffer(imageBuffer); // Store original image buffer
+
+      worker.postMessage({
+        image: imageBuffer, // Send original image buffer to worker
+        options: { blur: 0 }, // Default effect for demo purposes
+        suffix: suffix, // File extension
       });
 
-    worker.addEventListener("message", (e) => {
-      if (e.data.base64) {
-        setOutput(e.data.base64); // Update the output image
+      worker.addEventListener("message", (e) => {
+        if (e.data.base64) {
+          setOutput(e.data.base64); // Update output with base64 image
+          setIsLoading(false); // Stop loading
+        }
+      });
+
+      worker.addEventListener("error", (err) => {
+        console.error("Worker error:", err);
         setIsLoading(false);
-      }
+      });
     });
 
     return () => {
       worker.terminate();
     };
-  }, [imageUrl]);
+  }, [file]);
 
-  // Function to send image effects to the worker
+  // Function to apply effects to the image using the worker
   const applyEffect = (options: object) => {
     if (originalImageBuffer) {
       setIsLoading(true); // Start loading
@@ -54,15 +68,17 @@ export default function ImagePlusButtons({ imageUrl }: { imageUrl: string }) {
         }
       );
 
+      const suffix = file!.name.slice(file!.name.lastIndexOf(".")); // File extension
+
       worker.postMessage({
-        image: originalImageBuffer, // Send original image buffer to worker
-        options, // Send effect options
-        suffix, // File extension
+        image: originalImageBuffer, // Use original image buffer
+        options: options, // Apply selected effect
+        suffix: suffix, // Pass file extension
       });
 
       worker.addEventListener("message", (e) => {
         if (e.data.base64) {
-          setOutput(e.data.base64); // Update the output image
+          setOutput(e.data.base64); // Update output with base64 image
           setIsLoading(false); // Stop loading
         }
       });
@@ -74,19 +90,24 @@ export default function ImagePlusButtons({ imageUrl }: { imageUrl: string }) {
     }
   };
 
-  // Reset function to reload the page
+  // Reset function to reload the page and reset state
   const resetImage = () => {
-    window.location.reload(); // Reload page to reset state
+    window.location.reload(); // Reload page to reset everything
   };
 
   return (
     <div>
+      <input
+        type="file"
+        accept=".JPG, .PNG, .JPEG, .BMP, .TIFF, .GIF"
+        onChange={handleChange}
+      />
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <div>
           <Image
-            src={output || imageUrl}
+            src={output || URL.createObjectURL(file!)}
             alt="Edited Image"
             height={500}
             width={500}
