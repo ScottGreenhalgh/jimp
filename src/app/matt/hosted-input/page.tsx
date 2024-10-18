@@ -4,89 +4,89 @@ import Image from "next/image";
 export default async function MattHostedInputPage() {
 
   // basic resize
-  const image1 = await Jimp.read("./public/sloth.jpg");
+  const image1 = await Jimp.read("./public/sloth.png");
   image1.resize({w:100});
-  await image1.write("./public/sloth-small.jpg");
+  await image1.write("./public/sloth-small.png");
 
   // blur
-  const image2 = await Jimp.read("./public/sloth.jpg");
+  const image2 = await Jimp.read("./public/sloth.png");
   image2.blur(20);
-  await image2.write("./public/sloth-blur.jpg");
+  await image2.write("./public/sloth-blur.png");
 
   // invert
-  const image3 = await Jimp.read("./public/sloth.jpg");
+  const image3 = await Jimp.read("./public/sloth.png");
   image3.invert();
-  await image3.write("./public/sloth-invert.jpg");
+  await image3.write("./public/sloth-invert.png");
 
   // opacity
-  const image4 = await Jimp.read("./public/sloth.jpg");
-  image4.opacity(0.1);
-  await image4.write("./public/sloth-opacity.jpg");
+  const image4 = await Jimp.read("./public/sloth.png");
+  image4.opacity(0.3);
+  await image4.write("./public/sloth-opacity.png");
 
   // pixelate
-  const image5 = await Jimp.read("./public/sloth.jpg");
+  const image5 = await Jimp.read("./public/sloth.png");
   image5.pixelate(20)
-  await image5.write("./public/sloth-pixelate.jpg");
+  await image5.write("./public/sloth-pixelate.png");
 
-  const image6 = await Jimp.read("./public/sloth.jpg");
+  const image6 = await Jimp.read("./public/sloth.png");
   image6.sepia();
-  await image6.write("./public/sloth-sepia.jpg");
+  await image6.write("./public/sloth-sepia.png");
 
-  const image7 = await Jimp.read("./public/sloth.jpg");
+  const image7 = await Jimp.read("./public/sloth.png");
   image7.posterize(5);
-  await image7.write("./public/sloth-posterize.jpg");
+  await image7.write("./public/sloth-posterize.png");
 
-  const image8 = await Jimp.read("./public/sloth.jpg");
+  const image8 = await Jimp.read("./public/sloth.png");
   const image8font = await loadFont('public/fonts/NotoSans.fnt');
   image8.print({font:image8font, x:100, y:200, text:"omg sloth!"});
-  await image8.write("./public/sloth-text.jpg");
+  await image8.write("./public/sloth-text.png");
 
-  const image9 = await Jimp.read("./public/sloth.jpg");
+  const image9 = await Jimp.read("./public/sloth.png");
   image9.quantize({colors: 2})
-  await image9.write("./public/sloth-quantize.jpg");
+  await image9.write("./public/sloth-quantize.png");
 
-  const image10 = await Jimp.read("./public/sloth.jpg");
+  const image10 = await Jimp.read("./public/sloth.png");
   image10.quantize({colors: 4})
-  await image10.write("./public/sloth-quantize4.jpg");
+  await image10.write("./public/sloth-quantize4.png");
 
-  const image11 = await Jimp.read("./public/sloth.jpg");
+  const image11 = await Jimp.read("./public/sloth.png");
   image11.fisheye();
-  await image11.write("./public/sloth-fisheye.jpg");
+  await image11.write("./public/sloth-fisheye.png");
 
-  const image12 = await Jimp.read("./public/sloth.jpg");
+  const image12 = await Jimp.read("./public/sloth.png");
   image12.normalize();
-  await image12.write("./public/sloth-normalize.jpg");
+  await image12.write("./public/sloth-normalize.png");
 
-  const image13 = await Jimp.read("./public/sloth.jpg");
+  const image13 = await Jimp.read("./public/sloth.png");
   image13.flip({horizontal:true, vertical:true});
-  await image13.write("./public/sloth-flip.jpg");
+  await image13.write("./public/sloth-flip.png");
 
-  const image14 = await Jimp.read("./public/sloth.jpg");
+  const image14 = await Jimp.read("./public/sloth.png");
   image14.crop({h:200, w:200, x:100, y:100});
-  await image14.write("./public/sloth-crop.jpg");
+  await image14.write("./public/sloth-crop.png");
 
-  const image15 = await Jimp.read("./public/sloth.jpg");
+  const image15 = await Jimp.read("./public/sloth.png");
   image15.rotate({deg:130, mode:false});
-  await image15.write("./public/sloth-rotate.jpg");
+  await image15.write("./public/sloth-rotate.png");
 
-  const image16 = await Jimp.read("./public/sloth.jpg");
-  image16.fade(0.9);
-  await image16.write("./public/sloth-fade.jpg");
+  const image16 = await Jimp.read("./public/sloth.png");
+  image16.fade(0.6);
+  await image16.write("./public/sloth-fade.png");
 
-  const image17 = await Jimp.read("./public/sloth.jpg");
+  const image17 = await Jimp.read("./public/sloth.png");
   image17.brightness(2);
-  await image17.write("./public/sloth-brightness.jpg");
+  await image17.write("./public/sloth-brightness.png");
 
   return (
-    <div className="bg-gradient-to-tr from-indigo-500 to-rose-400 w-full h-full">
-      <div className="flex flex-wrap gap-4 items-center text-center font-bold text-xl p-4">
+    <div className="bg-gradient-to-tr from-indigo-500 to-rose-400 h-full">
+      <div className="flex flex-wrap gap-4 items-center justify-center text-center font-bold text-3xl p-4">
         
         <div className="rounded-3xl bg-slate-700 bg-opacity-40 p-5">
           <p className="pb-4">
             Input
           </p>
           <Image
-            src="/sloth.jpg"
+            src="/sloth.png"
             width={256}
             height={256}
             alt=""
@@ -99,7 +99,7 @@ export default async function MattHostedInputPage() {
             Resize
           </p>
           <Image
-            src="/sloth-small.jpg"
+            src="/sloth-small.png"
             width={256}
             height={256}
             alt=""
@@ -112,7 +112,7 @@ export default async function MattHostedInputPage() {
             Blur
           </p>
           <Image
-            src="/sloth-blur.jpg"
+            src="/sloth-blur.png"
             width={256}
             height={256}
             alt=""
@@ -125,7 +125,7 @@ export default async function MattHostedInputPage() {
             Invert
           </p>
           <Image
-            src="/sloth-invert.jpg"
+            src="/sloth-invert.png"
             width={256}
             height={256}
             alt=""
@@ -138,7 +138,7 @@ export default async function MattHostedInputPage() {
             Opacity
           </p>
           <Image
-            src="/sloth-opacity.jpg"
+            src="/sloth-opacity.png"
             width={256}
             height={256}
             alt=""
@@ -151,7 +151,7 @@ export default async function MattHostedInputPage() {
             Pixelate
           </p>
           <Image
-            src="/sloth-pixelate.jpg"
+            src="/sloth-pixelate.png"
             width={256}
             height={256}
             alt=""
@@ -164,7 +164,7 @@ export default async function MattHostedInputPage() {
             Sepia
           </p>
           <Image
-            src="/sloth-sepia.jpg"
+            src="/sloth-sepia.png"
             width={256}
             height={256}
             alt=""
@@ -177,7 +177,7 @@ export default async function MattHostedInputPage() {
             Posterize
           </p>
           <Image
-            src="/sloth-posterize.jpg"
+            src="/sloth-posterize.png"
             width={256}
             height={256}
             alt=""
@@ -190,7 +190,7 @@ export default async function MattHostedInputPage() {
             Text
           </p>
           <Image
-            src="/sloth-text.jpg"
+            src="/sloth-text.png"
             width={256}
             height={256}
             alt=""
@@ -203,7 +203,7 @@ export default async function MattHostedInputPage() {
             Quantize (2)
           </p>
           <Image
-            src="/sloth-quantize.jpg"
+            src="/sloth-quantize.png"
             width={256}
             height={256}
             alt=""
@@ -216,7 +216,7 @@ export default async function MattHostedInputPage() {
             Quantize (4)
           </p>
           <Image
-            src="/sloth-quantize4.jpg"
+            src="/sloth-quantize4.png"
             width={256}
             height={256}
             alt=""
@@ -229,7 +229,7 @@ export default async function MattHostedInputPage() {
             Fisheye
           </p>
           <Image
-            src="/sloth-fisheye.jpg"
+            src="/sloth-fisheye.png"
             width={256}
             height={256}
             alt=""
@@ -242,7 +242,7 @@ export default async function MattHostedInputPage() {
             Normalize
           </p>
           <Image
-            src="/sloth-normalize.jpg"
+            src="/sloth-normalize.png"
             width={256}
             height={256}
             alt=""
@@ -255,7 +255,7 @@ export default async function MattHostedInputPage() {
             Flip
           </p>
           <Image
-            src="/sloth-flip.jpg"
+            src="/sloth-flip.png"
             width={256}
             height={256}
             alt=""
@@ -268,7 +268,7 @@ export default async function MattHostedInputPage() {
             Crop
           </p>
           <Image
-            src="/sloth-crop.jpg"
+            src="/sloth-crop.png"
             width={256}
             height={256}
             alt=""
@@ -281,7 +281,7 @@ export default async function MattHostedInputPage() {
             Rotate
           </p>
           <Image
-            src="/sloth-rotate.jpg"
+            src="/sloth-rotate.png"
             width={256}
             height={256}
             alt=""
@@ -294,7 +294,7 @@ export default async function MattHostedInputPage() {
             Fade
           </p>
           <Image
-            src="/sloth-fade.jpg"
+            src="/sloth-fade.png"
             width={256}
             height={256}
             alt=""
@@ -307,7 +307,7 @@ export default async function MattHostedInputPage() {
             Brightness
           </p>
           <Image
-            src="/sloth-brightness.jpg"
+            src="/sloth-brightness.png"
             width={256}
             height={256}
             alt=""

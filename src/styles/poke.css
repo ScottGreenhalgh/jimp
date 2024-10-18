@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Leckerli+One&family=Modak&family=Pacifico&family=Playwrite+CU:wght@100..400&display=swap');
+
+.handwriting {
+  font-family: "Jua", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+input, select, textarea {
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
+  background-color:rgb(239, 236, 231);
+  color: #2f2e2e;
+  font-weight: 600;
+}
+
+textarea {
+  resize: none;
+}
+
+select {
+  padding: 0.6rem 0.6rem;
+}
+
+button {
+  border-radius: 10px;
+  margin: 0 auto;
+  font-weight: 600;
+  color: rgb(239, 236, 231);
+  background: #2f2e2e;
+  padding: 1rem 1.2rem;
+  margin-top: 0.5rem;
+  transition: background 0.4s, color 0.25s;
+}
+button:hover {
+  background: #ba9f46;
+  color: white;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  color: rgb(239, 236, 231);
+  padding-bottom: 0.2rem;
+}
+
+form span {
+  color: rgb(239, 236, 231);
+}
