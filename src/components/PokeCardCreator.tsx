@@ -1,9 +1,8 @@
 "use client";
 
-import { HorizontalAlign, Jimp, loadFont, VerticalAlign } from "jimp";
+import { HorizontalAlign, Jimp, loadFont, VerticalAlign, rgbaToInt } from "jimp";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { rgbaToInt } from "jimp";
 import '@/styles/poke.css'
 
 export default function PokeCardCreator() {
@@ -94,7 +93,7 @@ export default function PokeCardCreator() {
     // const abortController = new AbortController();
 
     const renderCardReset = setInterval(() => {
-      async function makeCard(inputImage) {
+      async function makeCard(inputImage: InstanceType<typeof Jimp>) {
 
         // if (abortController.signal.aborted) return;
 
@@ -110,9 +109,9 @@ export default function PokeCardCreator() {
         const gillCb44 = await loadFont("/fonts/gill-cb-44.fnt");
         const gillCb48 = await loadFont("/fonts/gill-cb-48.fnt");
         const gillCp64 = await loadFont("/fonts/gill-cp-64.fnt");
-        const gillRi24 = await loadFont("/fonts/gill-ri-24.fnt");
-        const gillRi22 = await loadFont("/fonts/gill-ri-22.fnt");
-        const gillRbi24 = await loadFont("/fonts/gill-rbi-24.fnt");
+        // const gillRi24 = await loadFont("/fonts/gill-ri-24.fnt");
+        // const gillRi22 = await loadFont("/fonts/gill-ri-22.fnt");
+        // const gillRbi24 = await loadFont("/fonts/gill-rbi-24.fnt");
         const gillRbi22 = await loadFont("/fonts/gill-rbi-22.fnt");
         const energyType = await Jimp.read(`/poke/energy-large-${formData.type}.png`);
         const energyColorless = await Jimp.read(`/poke/energy-colorless.png`);
@@ -186,7 +185,7 @@ export default function PokeCardCreator() {
 
         if (!file) {
           const missingo = await Jimp.read("/poke/missingno.png");
-          const outputImage = await makeCard(missingo);
+          const outputImage = await makeCard(missingo as InstanceType<typeof Jimp>);
           const base64 = await outputImage.getBase64("image/png");
           setOutput(base64);
         } else {
@@ -196,7 +195,7 @@ export default function PokeCardCreator() {
             const buffer = e.target.result as ArrayBuffer;
             const inputImage = await Jimp.read(buffer);
 
-            const outputImage = await makeCard(inputImage);
+            const outputImage = await makeCard(inputImage as InstanceType<typeof Jimp>);
 
             const base64 = await outputImage.getBase64("image/png");
             setOutput(base64);
