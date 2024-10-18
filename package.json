@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jimp/core": "^1.6.0",
     "@jimp/plugin-print": "^1.6.0",
+    "@jimp/types": "^1.6.0",
+    "@jimp/utils": "^1.6.0",
     "jimp": "^1.6.0",
     "next": "14.2.15",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-spinners": "^0.14.1"
   },
   "devDependencies": {
     "@types/node": "^20",
