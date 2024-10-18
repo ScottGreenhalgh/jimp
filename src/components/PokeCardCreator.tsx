@@ -4,6 +4,8 @@ import { HorizontalAlign, Jimp, loadFont, VerticalAlign, rgbaToInt } from "jimp"
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import '@/styles/poke.css'
+import { DotLoader } from "react-spinners";
+
 
 export default function PokeCardCreator() {
 
@@ -108,7 +110,7 @@ export default function PokeCardCreator() {
         // setup
         const gillCb44 = await loadFont("/fonts/gill-cb-44.fnt");
         const gillCb48 = await loadFont("/fonts/gill-cb-48.fnt");
-        const gillCp64 = await loadFont("/fonts/gill-cp-64.fnt");
+        const gillRp64 = await loadFont("/fonts/gill-rp-64.fnt");
         // const gillRi24 = await loadFont("/fonts/gill-ri-24.fnt");
         // const gillRi22 = await loadFont("/fonts/gill-ri-22.fnt");
         // const gillRbi24 = await loadFont("/fonts/gill-rbi-24.fnt");
@@ -147,13 +149,13 @@ export default function PokeCardCreator() {
         // move 1
         card.composite(energyType, 80, 609);
         card.print({font: gillCb44 , x: 114, y:600, text:{text:`${formData.move1name}`, alignmentX: HorizontalAlign.CENTER, alignmentY: VerticalAlign.MIDDLE} , maxWidth: 500, maxHeight: 50});
-        card.print({font: gillCp64 , x: 596, y:600, text:{text:`${formData.move1dmg}`, alignmentX: HorizontalAlign.CENTER, alignmentY: VerticalAlign.MIDDLE} , maxWidth: 50, maxHeight: 50});
+        card.print({font: gillRp64 , x: 570, y:600, text:{text:`${formData.move1dmg}`, alignmentX: HorizontalAlign.CENTER, alignmentY: VerticalAlign.MIDDLE} , maxWidth: 100, maxHeight: 50});
 
         // move 2
         card.composite(energyType, 58, 709);
         card.composite(energyColorless, 108, 709);
         card.print({font: gillCb44 , x: 114, y:700, text:{text:`${formData.move2name}`, alignmentX: HorizontalAlign.CENTER, alignmentY: VerticalAlign.MIDDLE} , maxWidth: 500, maxHeight: 50});
-        card.print({font: gillCp64 , x: 596, y:700, text:{text:`${formData.move2dmg}`, alignmentX: HorizontalAlign.CENTER, alignmentY: VerticalAlign.MIDDLE} , maxWidth: 50, maxHeight: 50});
+        card.print({font: gillRp64 , x: 570, y:700, text:{text:`${formData.move2dmg}`, alignmentX: HorizontalAlign.CENTER, alignmentY: VerticalAlign.MIDDLE} , maxWidth: 100, maxHeight: 50});
 
         // weakness, resistance & retreat cost
         card.composite(weakness, 100, 834);
@@ -218,7 +220,7 @@ export default function PokeCardCreator() {
 
   return (
     <div className="flex gap-0 w-full h-svh justify-evenly items-center">
-      <h1 className="handwriting absolute top-14 text-5xl opacity-50 text-zinc-100">Pokemon Card Generator</h1>
+      <h1 className="handwriting absolute top-7 text-5xl opacity-50 text-zinc-100">Pokemon Card Generator</h1>
       <form onSubmit={handleUpdate} onChange={handleUpdate} className="flex gap-10 text-black text-2xl rounded-3xl bg-slate-700 bg-opacity-40 px-12 py-10">
         <div className="flex flex-col gap-5">
           
@@ -371,7 +373,17 @@ export default function PokeCardCreator() {
 
       </form>
       <div className="rounded-3xl bg-slate-700 bg-opacity-40 p-5">
+        {!output ? (
+          <div className="w-[500px] h-[684px] flex flex-col justify-center items-center">
+            <p className="text-4xl mb-20 font-medium text-zinc-100">Loading</p> 
+            <DotLoader
+              size={100}
+              color={"#2f2e2e"}
+            />
+          </div>
+        ) : (
         <Image src={output} alt="poke" height={500} width={500} />
+        )}
       </div>
     </div>
   )
